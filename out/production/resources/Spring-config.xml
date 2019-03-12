@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+    <!--Question 1-->
+    <bean id="database" class="Database">
+        <property name="name" value="Mysql"/>
+        <property name="port" value="8080"/>
+    </bean>
+
+
+    <!--Question 3-->
+    <bean id="tea" class="question2.Tea"/>
+
+    <bean id="expresstea" class="question2.ExpressTea" primary="true"/>
+
+
+    <bean id="teaRestaurant" class="question2.Restaurant">
+        <property name="hotDrink" ref="tea"/>
+    </bean>
+
+
+    <!--Question 4-->
+    <bean id="teaExpressRestaurant" class="question2.Restaurant">
+        <property name="hotDrink">
+            <bean class="question2.ExpressTea"/>
+        </property>
+    </bean>
+
+    <!--Question 5-->
+    <bean id="complexBean" class="question5.Complex">
+        <property name="list">
+            <list>
+                <value>Value 1</value>
+                <value>Value 2</value>
+                <value>Value 3</value>
+            </list>
+        </property>
+
+        <property name="set">
+            <set>
+                <value>A</value>
+                <value>B</value>
+                <value>C</value>
+                <value>A</value>
+            </set>
+        </property>
+
+        <property name="map">
+            <map>
+                <entry key="1" value="Shivam"/>
+                <entry key="2" value="Sumit"/>
+                <entry key="3" value="Abhinav"/>
+            </map>
+        </property>
+    </bean>
+
+
+
+    <!--Question 6-->
+    <bean id="hotDrink" class="question2.Tea"/>
+    <bean id="prepareHotDrink" class="question2.Restaurant"/>
+
+
+    <bean id="expressTea1" class="question2.ExpressTea"/>
+    <bean id="prepareHotDrink1" class="question2.Restaurant"/>
+
+    <bean id="expressTea2" class="question2.ExpressTea"/>
+    <bean id="prepareHotDrink2" class="question2.Restaurant"/>
+
+
+
+    <!--Question 7-->
+    <bean id="expressTea7" class="question2.ExpressTea" scope="prototype"/>
+
+    <bean id="ExpressTeaRestaurant" class="question2.Restaurant">
+        <property name="hotDrink" ref="expressTea7"/>
+    </bean>
+
+    <bean id="ExpressTeaRestaurant1" class="question2.Restaurant">
+        <property name="hotDrink" ref="expressTea7"/>
+    </bean>
+
+
+    <!--Question 8-->
+    <context:annotation-config/>
+
+    <context:component-scan base-package="question2"/>
+</beans>
